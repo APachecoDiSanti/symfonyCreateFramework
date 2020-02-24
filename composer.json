@@ -1,4 +1,6 @@
 {
+    "name": "Simplex Framework",
+    "description": "Framework built with Symfony components and following their tutorial",
     "require": {
         "symfony/http-foundation": "^5.0",
         "symfony/routing": "^5.0",
@@ -6,5 +8,9 @@
     },
     "autoload": {
         "psr-4": { "": "src/" }
+    },
+    "require-dev": {
+        "symfony/phpunit-bridge": "^5.0",
+        "phpunit/phpunit": "^8.5"
     }
 }
