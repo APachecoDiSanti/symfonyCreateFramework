@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Controller\ControllerResolver;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
+use Symfony\Component\HttpKernel;
 use Symfony\Component\Routing;
 
 function render_template(Request $request) {
@@ -36,6 +37,11 @@ $framework = new Simplex\Framework(
     $argumentResolver
 );
 
-$response = $framework->handle($request);
+$framework = new HttpKernel\HttpCache\HttpCache(
+    $framework,
+    new HttpKernel\HttpCache\Store(__DIR__.'/../cache'),
+    new HttpKernel\HttpCache\Esi(),
+    ['debug' => true]
+);
 
-$response->send();
+$framework->handle($request)->send();
